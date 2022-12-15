@@ -1,14 +1,10 @@
 import React from "react";
 
-import logo from "../assets/images/logo.png";
-import user from "../assets/images/icons/user.svg";
-import cart from "../assets/images/icons/cart.svg";
-
 function Header() {
   return (
     <header className="header">
       <div className="header__logo">
-        <img src={logo} width={40} height={40} alt="logo" />
+        <img src="/assets/images/logo.png" width={40} height={40} alt="logo" />
         <div>
           <h1 className="header__title">REACT Shop</h1>
           <p className="header__subtitle">Магазин лучших кроссовок</p>
@@ -16,7 +12,7 @@ function Header() {
       </div>
       <ul className="header__right" role="list">
         <li className="header__item header__cart">
-          <img src={cart} alt="cart" />
+          <img src="/assets/images/icons/cart.svg" alt="cart" />
           <span>12 999 руб.</span>
         </li>
         <li className="header__item header__heard">
@@ -34,7 +30,7 @@ function Header() {
           </svg>
         </li>
         <li className="header__item header__user">
-          <img src={user} alt="user" />
+          <img src="/assets/images/icons/user.svg" alt="user" />
         </li>
       </ul>
     </header>
