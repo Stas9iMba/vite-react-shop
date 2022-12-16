@@ -1,3 +1,5 @@
+import React from "react";
+
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import Card from "./components/Card";
@@ -28,14 +30,12 @@ const arr = [
 ];
 
 function App() {
-  function addProduct(value) {
-    console.log(value);
-  }
+  const [isOpenedCard, setIsOpenedCard] = React.useState(false);
 
   return (
     <div className="wrapper">
-      <Drawer />
-      <Header />
+      {isOpenedCard && <Drawer onClickClose={() => setIsOpenedCard(false)} />}
+      <Header onClickOpened={() => setIsOpenedCard(true)} />
       <main className="main">
         <div className="main__top">
           <h2 className="main__title">Все кроссовки</h2>
@@ -52,13 +52,7 @@ function App() {
         </div>
         <ul className="main__products" role="list">
           {arr.map((obj, index) => {
-            return (
-              <Card
-                {...obj}
-                key={index}
-                addProductButton={() => addProduct(obj)}
-              />
-            );
+            return <Card {...obj} key={index} />;
           })}
         </ul>
       </main>

@@ -1,12 +1,31 @@
 import React from "react";
 
-function Card({ name, price, imgProduct, addProductButton }) {
+function Card({ name, price, imgProduct }) {
+  const [isAdded, setIsAdded] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
+
+  function handleAddedProduct() {
+    setIsAdded((isActive) => !isActive);
+  }
+
+  function handleFavoriteProduct() {
+    setIsFavorite((isFavorite) => !isFavorite);
+  }
+
   return (
     <li className="main__product">
       <div className="main__img">
-        <div className="main__img-heard">
-          <img src="/assets/images/icons/button-heart.svg" alt="btnHeard" />
-        </div>
+        <img
+          className="main__img-heard"
+          onClick={handleFavoriteProduct}
+          src={
+            isFavorite
+              ? "/assets/images/icons/button-heart--active.svg"
+              : "/assets/images/icons/button-heart.svg"
+          }
+          alt="btnHeard"
+        />
+
         <img src={imgProduct} alt="product" />
       </div>
       <div className="main__name">
@@ -17,9 +36,16 @@ function Card({ name, price, imgProduct, addProductButton }) {
           <span>Цена: </span>
           <span>{price} руб.</span>
         </div>
-        <button className="main__button" onClick={addProductButton}>
-          <img src="/assets/images/icons/button-add.svg" alt="Plus" />
-        </button>
+        <img
+          className="main__button"
+          onClick={handleAddedProduct}
+          src={
+            isAdded
+              ? "/assets/images/icons/button-add--active.svg"
+              : "/assets/images/icons/button-add.svg"
+          }
+          alt="Plus"
+        />
       </div>
     </li>
   );

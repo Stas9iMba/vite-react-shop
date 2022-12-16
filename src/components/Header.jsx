@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Header({ onClickOpened }) {
   return (
     <header className="header">
       <div className="header__logo">
@@ -11,7 +11,7 @@ function Header() {
         </div>
       </div>
       <ul className="header__right" role="list">
-        <li className="header__item header__cart">
+        <li className="header__item header__cart" onClick={onClickOpened}>
           <img src="/assets/images/icons/cart.svg" alt="cart" />
           <span>12 999 руб.</span>
         </li>

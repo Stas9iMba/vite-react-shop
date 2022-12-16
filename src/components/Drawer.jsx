@@ -1,6 +1,6 @@
 import React from "react";
 
-function Drawer() {
+function Drawer({ onClickClose }) {
   return (
     <section className="side-basket">
       <div className="side-basket__box">
@@ -12,6 +12,7 @@ function Drawer() {
             height={32}
             src="/assets/images/icons/button-remove.svg"
             alt="Close"
+            onClick={onClickClose}
           />
         </div>
         <ul className="side-basket__items" role="list">

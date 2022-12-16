@@ -233,7 +233,6 @@ body {
 
   &__img-heard {
     position: absolute;
-    cursor: pointer;
   }
 
   &__name {
@@ -263,16 +262,14 @@ body {
     }
   }
 
+  &__img-heard,
   &__button {
-    border: none;
-    background-color: transparent;
     cursor: pointer;
   }
 
 }
 
 .side-basket {
-  display: none;
   position: absolute;
   height: 100%;
   width: 100%;
