@@ -1,10 +1,11 @@
 import React from "react";
 
-function Card({ name, price, imgProduct }) {
+function Card({ name, price, imgProduct, addProduct }) {
   const [isAdded, setIsAdded] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   function handleAddedProduct() {
+    addProduct({ name, price, imgProduct });
     setIsAdded((isActive) => !isActive);
   }
 

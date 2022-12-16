@@ -8,7 +8,12 @@ import "./App.scss";
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const [cardItems, setCardItems] = React.useState([]);
   const [isOpenedCard, setIsOpenedCard] = React.useState(false);
+
+  function onAddToCard(obj) {
+    setCardItems((prev) => [...prev, obj]);
+  }
 
   React.useEffect(() => {
     fetch("https://639c41cc16d1763ab14412f9.mockapi.io/items")
@@ -18,7 +23,9 @@ function App() {
 
   return (
     <div className="wrapper">
-      {isOpenedCard && <Drawer onClickClose={() => setIsOpenedCard(false)} />}
+      {isOpenedCard && (
+        <Drawer items={cardItems} onClickClose={() => setIsOpenedCard(false)} />
+      )}
       <Header onClickOpened={() => setIsOpenedCard(true)} />
       <main className="main">
         <div className="main__top">
@@ -36,7 +43,13 @@ function App() {
         </div>
         <ul className="main__products" role="list">
           {items.map((obj, index) => {
-            return <Card {...obj} key={index} />;
+            return (
+              <Card
+                {...obj}
+                key={index}
+                addProduct={(item) => onAddToCard(item)}
+              />
+            );
           })}
         </ul>
       </main>

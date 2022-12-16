@@ -1,6 +1,6 @@
 import React from "react";
 
-function Drawer({ onClickClose }) {
+function Drawer({ items = [], onClickClose }) {
   return (
     <section className="side-basket">
       <div className="side-basket__box">
@@ -16,31 +16,33 @@ function Drawer({ onClickClose }) {
           />
         </div>
         <ul className="side-basket__items" role="list">
-          <li className="side-basket__item">
-            <img
-              width={70}
-              height={60}
-              src="/assets/images/product-1.jpg"
-              alt="product"
-            />
-            <div className="card__info">
-              <h5 className="card__name">
-                Мужские Кроссовки Nike Brazer Mid Suede
-              </h5>
-              <div className="card__info-price">
-                <span>12 999 руб.</span>
-              </div>
-            </div>
-            <button className="card__btn">
-              <img
-                className="card__btn-img"
-                width={32}
-                height={32}
-                src="/assets/images/icons/button-remove.svg"
-                alt="remove"
-              />
-            </button>
-          </li>
+          {items.map((obj, index) => {
+            return (
+              <li className="side-basket__item" key={index}>
+                <img
+                  width={70}
+                  height={60}
+                  src={obj.imgProduct}
+                  alt="product"
+                />
+                <div className="card__info">
+                  <h5 className="card__name">{obj.name}</h5>
+                  <div className="card__info-price">
+                    <span>{obj.price} руб.</span>
+                  </div>
+                </div>
+                <button className="card__btn">
+                  <img
+                    className="card__btn-img"
+                    width={32}
+                    height={32}
+                    src="/assets/images/icons/button-remove.svg"
+                    alt="remove"
+                  />
+                </button>
+              </li>
+            );
+          })}
         </ul>
         <ul className="side-basket__list list-info">
           <li>
