@@ -6,31 +6,15 @@ import Card from "./components/Card";
 
 import "./App.scss";
 
-const arr = [
-  {
-    name: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 10799,
-    imgProduct: "/assets/images/product-1.jpg",
-  },
-  {
-    name: "Мужские Кроссовки Nike Air Max 270",
-    price: 11299,
-    imgProduct: "/assets/images/product-2.jpg",
-  },
-  {
-    name: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 8499,
-    imgProduct: "/assets/images/product-3.jpg",
-  },
-  {
-    name: "Кроссовки Puma X Aka Boku Future Rider",
-    price: 8999,
-    imgProduct: "/assets/images/product-4.jpg",
-  },
-];
-
 function App() {
+  const [items, setItems] = React.useState([]);
   const [isOpenedCard, setIsOpenedCard] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch("https://639c41cc16d1763ab14412f9.mockapi.io/items")
+      .then((response) => response.json())
+      .then((json) => setItems(json));
+  }, []);
 
   return (
     <div className="wrapper">
@@ -51,7 +35,7 @@ function App() {
           </form>
         </div>
         <ul className="main__products" role="list">
-          {arr.map((obj, index) => {
+          {items.map((obj, index) => {
             return <Card {...obj} key={index} />;
           })}
         </ul>
