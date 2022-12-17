@@ -7,7 +7,7 @@ function Drawer({ items = [], onClickClose }) {
         <div className="side-basket__top">
           <h2 className="side-basket__title">Корзина</h2>
           <img
-            className="card__btn-img"
+            className="drawer__btn-img"
             width={32}
             height={32}
             src="/assets/images/icons/button-remove.svg"
@@ -25,15 +25,15 @@ function Drawer({ items = [], onClickClose }) {
                   src={obj.imgProduct}
                   alt="product"
                 />
-                <div className="card__info">
-                  <h5 className="card__name">{obj.name}</h5>
-                  <div className="card__info-price">
+                <div className="drawer__info">
+                  <h5 className="drawer__name">{obj.name}</h5>
+                  <div className="drawer__info-price">
                     <span>{obj.price} руб.</span>
                   </div>
                 </div>
-                <button className="card__btn">
+                <button className="drawer__btn">
                   <img
-                    className="card__btn-img"
+                    className="drawer__btn-img"
                     width={32}
                     height={32}
                     src="/assets/images/icons/button-remove.svg"

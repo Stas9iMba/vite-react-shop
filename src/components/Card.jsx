@@ -14,10 +14,10 @@ function Card({ name, price, imgProduct, addProduct }) {
   }
 
   return (
-    <li className="main__product">
-      <div className="main__img">
+    <li className="card__product">
+      <div className="card__img">
         <img
-          className="main__img-heard"
+          className="card__img-heard"
           onClick={handleFavoriteProduct}
           src={
             isFavorite
@@ -29,16 +29,16 @@ function Card({ name, price, imgProduct, addProduct }) {
 
         <img src={imgProduct} alt="product" />
       </div>
-      <div className="main__name">
+      <div className="card__name">
         <span>{name}</span>
       </div>
-      <div className="main__box">
-        <div className="main__price">
+      <div className="card__box">
+        <div className="card__price">
           <span>Цена: </span>
           <span>{price} руб.</span>
         </div>
         <img
-          className="main__button"
+          className="card__button"
           onClick={handleAddedProduct}
           src={
             isAdded
