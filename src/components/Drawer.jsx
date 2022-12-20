@@ -74,6 +74,15 @@ function Drawer({ items = [], onClickClose, onRemove }) {
         ) : (
           <>
             <p>Корзина пуста</p>
+            <button className="btn" onClick={onClickClose}>
+              <img
+                width={16}
+                height={14}
+                src="/assets/images/icons/arrow-left.svg"
+                alt="arrow"
+              />
+              Вернуться назад
+            </button>
           </>
         )}
       </div>

@@ -12,6 +12,7 @@ function App() {
   const [cardItems, setCardItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [isOpenedCard, setIsOpenedCard] = React.useState(false);
+  const [favorites, setFavorites] = React.useState([]);
 
   // React.useEffect(() => {
   //   fetch("https://639c41cc16d1763ab14412f9.mockapi.io/items")
@@ -41,6 +42,11 @@ function App() {
     axios.delete(`https://639c41cc16d1763ab14412f9.mockapi.io/cart/${id}`);
     setCardItems((prev) => prev.filter((item) => item.id !== id));
   }
+
+  const onAddFavorite = (obj) => {
+    axios.post("https://639c41cc16d1763ab14412f9.mockapi.io/favorite", obj);
+    setFavorites((prev) => [...prev, obj]);
+  };
 
   function onChangeSearchInput(event) {
     setSearchValue(event.target.value);
@@ -102,6 +108,7 @@ function App() {
                 <Card
                   {...obj}
                   key={index}
+                  onClickFavorite={(obj) => onAddFavorite(obj)}
                   addProduct={(item) => onAddToCard(item)}
                 />
               );

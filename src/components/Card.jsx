@@ -1,6 +1,6 @@
 import React from "react";
 
-function Card({ name, price, imgProduct, addProduct }) {
+function Card({ name, price, imgProduct, addProduct, onClickFavorite }) {
   const [isAdded, setIsAdded] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -10,6 +10,7 @@ function Card({ name, price, imgProduct, addProduct }) {
   }
 
   function handleFavoriteProduct() {
+    onClickFavorite({ name, price, imgProduct });
     setIsFavorite((isFavorite) => !isFavorite);
   }
 
