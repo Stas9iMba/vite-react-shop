@@ -1,9 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-import Card from "./components/Card";
+// import Card from "./components/Card";
+import Home from "./pages/Home";
 
 import "./App.scss";
 
@@ -66,55 +68,21 @@ function App() {
         />
       )}
       <Header onClickOpened={() => setIsOpenedCard(true)} />
-      <main className="main">
-        <div className="main__top">
-          <h2 className="main__title">
-            {searchValue ? `Поиск: "${searchValue}"` : "Все кроссовки"}
-          </h2>
-          <form className="main__form" action="#">
-            <img
-              className="search"
-              width={20}
-              height={20}
-              src="/assets/images/icons/search.svg"
-              alt="search"
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              removeSearchInput={removeSearchInput}
+              onAddToCard={onAddToCard}
+              onAddFavorite={onAddFavorite}
             />
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              type="text"
-              placeholder="&nbsp;"
-              required
-            />
-            {searchValue && (
-              <img
-                className="remove"
-                width={15}
-                height={15}
-                src="/assets/images/icons/button-remove.svg"
-                alt="remove"
-                onClick={removeSearchInput}
-              />
-            )}
-          </form>
-        </div>
-        <ul className="main__products" role="list">
-          {items
-            .filter((item) =>
-              item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
-            )
-            .map((obj, index) => {
-              return (
-                <Card
-                  {...obj}
-                  key={index}
-                  onClickFavorite={(obj) => onAddFavorite(obj)}
-                  addProduct={(item) => onAddToCard(item)}
-                />
-              );
-            })}
-        </ul>
-      </main>
+          }
+        />
+      </Routes>
     </div>
   );
 }
