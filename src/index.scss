@@ -105,12 +105,44 @@ body {
   padding: 0 1rem;
 }
 
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: var(--bg-btn);
+  border-radius: 18px;
+  color: var(--bg-wrapper);
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    img {
+      transform: translate(5px);
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    transition: transform .15s ease-in-out;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
   border-bottom: 1px solid var(--color-300);
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   &__logo {
     display: flex;
@@ -204,6 +236,22 @@ body {
     gap: 2rem;
     padding-top: 2rem;
   }
+
+
+  &__favorite {
+    justify-content: start;
+    gap: 30px;
+  }
+
+  &__back {
+    opacity: .7;
+    cursor: pointer;
+    transform: opacity .3s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .side-basket {
@@ -270,6 +318,52 @@ body {
 
   &__list {
     margin-top: 30px;
+  }
+
+
+  &__empty {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__empty-img {
+    margin-bottom: 20px;
+  }
+
+  &__empty-title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    margin-bottom: 9px;
+  }
+
+  &__empty-subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 40px;
+    color: #56576f;
+  }
+
+  &__btn {
+    max-width: 245px;
+    width: 100%;
+
+    &:hover {
+      img {
+        transform: translate(-5px);
+      }
+    }
+
+    img {
+      left: 30px;
+      right: 0;
+      transition: transform .15s ease-in-out;
+    }
   }
 }
 
@@ -438,32 +532,5 @@ body {
 
   &__btn {
     margin-top: 20px;
-  }
-}
-
-
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: var(--bg-btn);
-  border-radius: 18px;
-  color: var(--bg-wrapper);
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  position: relative;
-
-  &:hover {
-    img {
-      transform: translate(5px);
-    }
-  }
-
-  img {
-    position: absolute;
-    right: 30px;
-    top: 20px;
-    transition: transform .15s ease-in-out;
   }
 }

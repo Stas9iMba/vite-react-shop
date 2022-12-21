@@ -73,16 +73,29 @@ function Drawer({ items = [], onClickClose, onRemove }) {
           </>
         ) : (
           <>
-            <p>Корзина пуста</p>
-            <button className="btn" onClick={onClickClose}>
+            <div className="side-basket__empty">
               <img
-                width={16}
-                height={14}
-                src="/assets/images/icons/arrow-left.svg"
-                alt="arrow"
+                className="side-basket__empty-img"
+                width={120}
+                height={120}
+                src="/assets/images/side-basket-empty.jpg"
+                alt="side-basket-empty"
               />
-              Вернуться назад
-            </button>
+              <p className="side-basket__empty-title">Корзина пуста</p>
+              <p className="side-basket__empty-subtitle">
+                {" "}
+                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
+              </p>
+              <button className="side-basket__btn btn" onClick={onClickClose}>
+                Вернуться назад
+                <img
+                  width={16}
+                  height={14}
+                  src="/assets/images/icons/arrow-left.svg"
+                  alt="arrow"
+                />
+              </button>
+            </div>
           </>
         )}
       </div>
