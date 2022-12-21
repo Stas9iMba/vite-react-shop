@@ -8,6 +8,7 @@ function Home({
   removeSearchInput,
   onAddToCard,
   onAddFavorite,
+  cardItems,
 }) {
   return (
     <main className="main">
@@ -47,13 +48,14 @@ function Home({
           .filter((item) =>
             item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
           )
-          .map((obj, index) => {
+          .map((obj) => {
             return (
               <Card
                 {...obj}
-                key={index}
+                key={obj.id}
                 onClickFavorite={(obj) => onAddFavorite(obj)}
                 addProduct={(item) => onAddToCard(item)}
+                added={cardItems.some((item) => item.id === obj.id)}
               />
             );
           })}

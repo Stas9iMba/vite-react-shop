@@ -23,27 +23,43 @@ function App() {
   // }, []);
 
   React.useEffect(() => {
-    axios
-      .get("https://639c41cc16d1763ab14412f9.mockapi.io/items")
-      .then((response) => {
-        setItems(response.data);
-      });
-    axios
-      .get("https://639c41cc16d1763ab14412f9.mockapi.io/cart")
-      .then((response) => {
-        setCardItems(response.data);
-      });
-    axios
-      .get("https://639c41cc16d1763ab14412f9.mockapi.io/favorite")
-      .then((response) => {
-        setFavorites(response.data);
-      });
+    async function fetchData() {
+      const itemsResponse = await axios.get(
+        "https://639c41cc16d1763ab14412f9.mockapi.io/items"
+      );
+      const cardItemResponse = await axios.get(
+        "https://639c41cc16d1763ab14412f9.mockapi.io/cart"
+      );
+      const favoriteResponse = await axios.get(
+        "https://639c41cc16d1763ab14412f9.mockapi.io/favorite"
+      );
+
+      setItems(itemsResponse.data);
+      setCardItems(cardItemResponse.data);
+      setFavorites(favoriteResponse.data);
+    }
+
+    fetchData();
   }, []);
 
-  function onAddToCard(obj) {
-    axios.post("https://639c41cc16d1763ab14412f9.mockapi.io/cart", obj);
-    setCardItems((prev) => [...prev, obj]);
-  }
+  const onAddToCard = async (obj) => {
+    try {
+      if (cardItems.find((item) => item.id === obj.id)) {
+        setCardItems((prev) => prev.filter((item) => item.id !== obj.id));
+        axios.delete(
+          `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${obj.id}`
+        );
+      } else {
+        const { data } = await axios.post(
+          "https://639c41cc16d1763ab14412f9.mockapi.io/cart",
+          obj
+        );
+        setCardItems((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert("Не удалось добавить товар в корзину");
+    }
+  };
 
   function onRemoveCard(id) {
     axios.delete(`https://639c41cc16d1763ab14412f9.mockapi.io/cart/${id}`);
@@ -98,6 +114,7 @@ function App() {
               removeSearchInput={removeSearchInput}
               onAddToCard={onAddToCard}
               onAddFavorite={onAddFavorite}
+              cardItems={cardItems}
             />
           }
         />

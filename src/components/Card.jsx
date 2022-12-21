@@ -8,8 +8,9 @@ function Card({
   addProduct,
   onClickFavorite,
   isFavorites = false,
+  added = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(false);
+  const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(isFavorites);
 
   function handleAddedProduct() {
