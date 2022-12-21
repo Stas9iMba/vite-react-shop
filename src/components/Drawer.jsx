@@ -18,9 +18,9 @@ function Drawer({ items = [], onClickClose, onRemove }) {
         {items.length > 0 ? (
           <>
             <ul className="side-basket__items" role="list">
-              {items.map((obj, index) => {
+              {items.map((obj) => {
                 return (
-                  <li className="side-basket__item" key={index}>
+                  <li className="side-basket__item" key={obj.id}>
                     <img
                       width={70}
                       height={60}
