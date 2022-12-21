@@ -15,6 +15,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState("");
   const [isOpenedCard, setIsOpenedCard] = React.useState(false);
   const [favorites, setFavorites] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   // React.useEffect(() => {
   //   fetch("https://639c41cc16d1763ab14412f9.mockapi.io/items")
@@ -34,6 +35,7 @@ function App() {
         "https://639c41cc16d1763ab14412f9.mockapi.io/favorite"
       );
 
+      setIsLoading(false);
       setItems(itemsResponse.data);
       setCardItems(cardItemResponse.data);
       setFavorites(favoriteResponse.data);
@@ -115,6 +117,7 @@ function App() {
               onAddToCard={onAddToCard}
               onAddFavorite={onAddFavorite}
               cardItems={cardItems}
+              isLoading={isLoading}
             />
           }
         />

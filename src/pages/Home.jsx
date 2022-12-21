@@ -9,7 +9,13 @@ function Home({
   onAddToCard,
   onAddFavorite,
   cardItems,
+  isLoading,
 }) {
+  const filterItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
+  );
+  console.log(items.length);
+
   return (
     <main className="main">
       <div className="main__top">
@@ -44,21 +50,18 @@ function Home({
         </form>
       </div>
       <ul className="main__products" role="list">
-        {items
-          .filter((item) =>
-            item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
-          )
-          .map((obj) => {
-            return (
-              <Card
-                {...obj}
-                key={obj.id}
-                onClickFavorite={(obj) => onAddFavorite(obj)}
-                addProduct={(item) => onAddToCard(item)}
-                added={cardItems.some((item) => item.id === obj.id)}
-              />
-            );
-          })}
+        {(isLoading ? [...Array(10)] : filterItems).map((obj, index) => {
+          return (
+            <Card
+              {...obj}
+              key={index}
+              onClickFavorite={(obj) => onAddFavorite(obj)}
+              addProduct={(item) => onAddToCard(item)}
+              added={cardItems.some((item) => item.id === obj.id)}
+              isLoading={isLoading}
+            />
+          );
+        })}
       </ul>
     </main>
   );

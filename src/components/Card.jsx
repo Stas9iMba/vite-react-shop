@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "./Skeleton";
 
 function Card({
   id,
@@ -9,6 +10,7 @@ function Card({
   onClickFavorite,
   isFavorites = false,
   added = false,
+  isLoading = false,
 }) {
   const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(isFavorites);
@@ -25,39 +27,45 @@ function Card({
 
   return (
     <li className="card__product">
-      <div className="card__img">
-        <img
-          className="card__img-heard"
-          onClick={handleFavoriteProduct}
-          src={
-            isFavorite
-              ? "/assets/images/icons/button-heart--active.svg"
-              : "/assets/images/icons/button-heart.svg"
-          }
-          alt="btnHeard"
-        />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <>
+          <div className="card__img">
+            <img
+              className="card__img-heard"
+              onClick={handleFavoriteProduct}
+              src={
+                isFavorite
+                  ? "/assets/images/icons/button-heart--active.svg"
+                  : "/assets/images/icons/button-heart.svg"
+              }
+              alt="btnHeard"
+            />
 
-        <img src={imgProduct} alt="product" />
-      </div>
-      <div className="card__name">
-        <span>{name}</span>
-      </div>
-      <div className="card__box">
-        <div className="card__price">
-          <span>Цена: </span>
-          <span>{price} руб.</span>
-        </div>
-        <img
-          className="card__button"
-          onClick={handleAddedProduct}
-          src={
-            isAdded
-              ? "/assets/images/icons/button-add--active.svg"
-              : "/assets/images/icons/button-add.svg"
-          }
-          alt="Plus"
-        />
-      </div>
+            <img src={imgProduct} alt="product" />
+          </div>
+          <div className="card__name">
+            <span>{name}</span>
+          </div>
+          <div className="card__box">
+            <div className="card__price">
+              <span>Цена: </span>
+              <span>{price} руб.</span>
+            </div>
+            <img
+              className="card__button"
+              onClick={handleAddedProduct}
+              src={
+                isAdded
+                  ? "/assets/images/icons/button-add--active.svg"
+                  : "/assets/images/icons/button-add.svg"
+              }
+              alt="Plus"
+            />
+          </div>
+        </>
+      )}
     </li>
   );
 }
