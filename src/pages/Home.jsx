@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
 
-
 function Home({
   items,
   searchValue,
@@ -14,7 +13,6 @@ function Home({
   const filterItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
   );
-
 
   return (
     <main className="main">
