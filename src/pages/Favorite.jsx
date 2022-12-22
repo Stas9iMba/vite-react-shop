@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Card from "../components/Card";
+import AppContext from "../context";
 
-function Favorite({ items, onAddFavorite }) {
-  console.log(items);
+function Favorite() {
+  const { favorites, onAddFavorite } = React.useContext(AppContext);
+
   return (
     <main className="main">
       <div className="main__top main__favorite">
@@ -20,7 +22,7 @@ function Favorite({ items, onAddFavorite }) {
         <h2 className="main__title">Моё избранное</h2>
       </div>
       <ul className="main__products" role="list">
-        {items.map((obj, index) => {
+        {favorites.map((obj, index) => {
           return (
             <Card
               {...obj}

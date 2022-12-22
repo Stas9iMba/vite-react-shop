@@ -1,5 +1,7 @@
 import React from "react";
+
 import Skeleton from "./Skeleton";
+import AppContext from "../context";
 
 function Card({
   id,
@@ -9,15 +11,15 @@ function Card({
   addProduct,
   onClickFavorite,
   isFavorites = false,
-  added = false,
   isLoading = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(added);
+
+  const { getAddedItems } = React.useContext(AppContext);
+  const [isAdded, setIsAdded] = React.useState();
   const [isFavorite, setIsFavorite] = React.useState(isFavorites);
 
   function handleAddedProduct() {
     addProduct({ id, name, price, imgProduct });
-    setIsAdded((isActive) => !isActive);
   }
 
   function handleFavoriteProduct() {
@@ -57,7 +59,7 @@ function Card({
               className="card__button"
               onClick={handleAddedProduct}
               src={
-                isAdded
+                getAddedItems(id)
                   ? "/assets/images/icons/button-add--active.svg"
                   : "/assets/images/icons/button-add.svg"
               }

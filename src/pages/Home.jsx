@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../components/Card";
 
+
 function Home({
   items,
   searchValue,
@@ -8,13 +9,12 @@ function Home({
   removeSearchInput,
   onAddToCard,
   onAddFavorite,
-  cardItems,
   isLoading,
 }) {
   const filterItems = items.filter((item) =>
     item.name.toLowerCase().includes(searchValue.toLowerCase(), [])
   );
-  console.log(items.length);
+
 
   return (
     <main className="main">
@@ -57,7 +57,6 @@ function Home({
               key={index}
               onClickFavorite={(obj) => onAddFavorite(obj)}
               addProduct={(item) => onAddToCard(item)}
-              added={cardItems.some((item) => item.id === obj.id)}
               isLoading={isLoading}
             />
           );

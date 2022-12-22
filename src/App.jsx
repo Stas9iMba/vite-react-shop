@@ -6,8 +6,7 @@ import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
 import Favorite from "./pages/Favorite";
-
-import "./App.scss";
+import AppContext from "./context";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -74,7 +73,7 @@ function App() {
         axios.delete(
           `https://639c41cc16d1763ab14412f9.mockapi.io/favorite/${obj.id}`
         );
-        // setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
+        setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
       } else {
         const { data } = await axios.post(
           "https://639c41cc16d1763ab14412f9.mockapi.io/favorite",
@@ -95,38 +94,49 @@ function App() {
     setSearchValue("");
   }
 
+  const getAddedItems = (id) => {
+    return cardItems.some((item) => item.id === id);
+  };
+
   return (
-    <div className="wrapper">
-      {isOpenedCard && (
-        <Drawer
-          items={cardItems}
-          onClickClose={() => setIsOpenedCard(false)}
-          onRemove={onRemoveCard}
-        />
-      )}
-      <Header onClickOpened={() => setIsOpenedCard(true)} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              items={items}
-              searchValue={searchValue}
-              onChangeSearchInput={onChangeSearchInput}
-              removeSearchInput={removeSearchInput}
-              onAddToCard={onAddToCard}
-              onAddFavorite={onAddFavorite}
-              cardItems={cardItems}
-              isLoading={isLoading}
-            />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={<Favorite items={favorites} onAddFavorite={onAddFavorite} />}
-        />
-      </Routes>
-    </div>
+    <AppContext.Provider
+      value={{
+        items,
+        cardItems,
+        favorites,
+        isLoading,
+        getAddedItems,
+        onAddFavorite,
+      }}
+    >
+      <div className="wrapper">
+        {isOpenedCard && (
+          <Drawer
+            items={cardItems}
+            onClickClose={() => setIsOpenedCard(false)}
+            onRemove={onRemoveCard}
+          />
+        )}
+        <Header onClickOpened={() => setIsOpenedCard(true)} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                items={items}
+                searchValue={searchValue}
+                onChangeSearchInput={onChangeSearchInput}
+                removeSearchInput={removeSearchInput}
+                onAddToCard={onAddToCard}
+                onAddFavorite={onAddFavorite}
+                isLoading={isLoading}
+              />
+            }
+          />
+          <Route path="/favorites" element={<Favorite />} />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   );
 }
 
