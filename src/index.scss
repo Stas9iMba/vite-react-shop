@@ -118,6 +118,12 @@ body {
   cursor: pointer;
   position: relative;
 
+  &:disabled {
+    background-color: #bebebe;
+    cursor: default;
+    animation: button-loading .6s ease-in-out infinite;
+  }
+
   &:hover {
     img {
       transform: translate(5px);
@@ -532,5 +538,19 @@ body {
 
   &__btn {
     margin-top: 20px;
+  }
+}
+
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .7;
+  }
+
+  100% {
+    opacity: 1;
   }
 }

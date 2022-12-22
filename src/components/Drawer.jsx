@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+import Info from "./Info";
+import AppContext from "../context";
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ items = [], onClickClose, onRemove }) {
+  const { cardItems, setCardItems } = React.useContext(AppContext);
+  const [isOrderCompleted, setIsOrderCompleted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [orderId, setOrderId] = useState(null);
+
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "https://639c41cc16d1763ab14412f9.mockapi.io/orders",
+        { items: cardItems }
+      );
+
+      setOrderId(data.id);
+      setIsOrderCompleted((isOrder) => !isOrder);
+      setCardItems([]);
+
+      for (let i = 0; i < cardItems.length; i++) {
+        const item = cardItems[i];
+        await axios.delete(
+          `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${item.id}`
+        );
+        await delay(1000);
+      }
+    } catch (error) {
+      alert("Ошибка при создании заказа =(");
+    }
+    setIsLoading(false);
+  };
+
   return (
     <section className="side-basket">
       <div className="side-basket__box">
@@ -60,7 +96,11 @@ function Drawer({ items = [], onClickClose, onRemove }) {
                 <span className="list-info__dashed"></span>
                 <span className="list-info__price">1074 руб.</span>
               </li>
-              <button className="list-info__btn btn">
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+                className="list-info__btn btn"
+              >
                 Оформить заказ
                 <img
                   width={16}
@@ -72,31 +112,19 @@ function Drawer({ items = [], onClickClose, onRemove }) {
             </ul>
           </>
         ) : (
-          <>
-            <div className="side-basket__empty">
-              <img
-                className="side-basket__empty-img"
-                width={120}
-                height={120}
-                src="/assets/images/side-basket-empty.jpg"
-                alt="side-basket-empty"
-              />
-              <p className="side-basket__empty-title">Корзина пуста</p>
-              <p className="side-basket__empty-subtitle">
-                {" "}
-                Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-              </p>
-              <button className="side-basket__btn btn" onClick={onClickClose}>
-                Вернуться назад
-                <img
-                  width={16}
-                  height={14}
-                  src="/assets/images/icons/arrow-left.svg"
-                  alt="arrow"
-                />
-              </button>
-            </div>
-          </>
+          <Info
+            title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
+            description={
+              isOrderCompleted
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+            }
+            img={
+              isOrderCompleted
+                ? "/assets/images/side-basket-order.jpg"
+                : "/assets/images/side-basket-empty.jpg"
+            }
+          />
         )}
       </div>
     </section>

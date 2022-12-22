@@ -107,6 +107,8 @@ function App() {
         isLoading,
         getAddedItems,
         onAddFavorite,
+        setIsOpenedCard,
+        setCardItems,
       }}
     >
       <div className="wrapper">
