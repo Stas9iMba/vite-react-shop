@@ -48,10 +48,12 @@ function App() {
 
   async function onAddToCard(obj) {
     try {
-      if (cardItems.find((item) => item.parentId === obj.id)) {
+      const findItem = cardItems.find((item) => item.parentId === obj.id);
+
+      if (findItem) {
         setCardItems((prev) => prev.filter((item) => item.parentId !== obj.id));
         await axios.delete(
-          `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${obj.id}`
+          `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${findItem.id}`
         );
       } else {
         const { data } = await axios.post(

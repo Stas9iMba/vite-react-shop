@@ -95,7 +95,7 @@ function Drawer({ items = [], onClickClose, onRemove, opened }) {
                 <span className="list-info__text">Налог 5%:</span>
                 <span className="list-info__dashed"></span>
                 <span className="list-info__price">
-                  {(totalPrice / 100) * 5} руб.
+                  {Math.floor((totalPrice / 100) * 5)} руб.
                 </span>
               </li>
               <button
