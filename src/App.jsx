@@ -26,15 +26,12 @@ function App() {
   React.useEffect(() => {
     try {
       async function fetchData() {
-        const itemsResponse = await axios.get(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/items"
-        );
-        const cardItemResponse = await axios.get(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/cart"
-        );
-        const favoriteResponse = await axios.get(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/favorite"
-        );
+        const [itemsResponse, cardItemResponse, favoriteResponse] =
+          await Promise.all([
+            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/items"),
+            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/cart"),
+            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/favorite"),
+          ]);
 
         setIsLoading(false);
         setItems(itemsResponse.data);
@@ -57,11 +54,11 @@ function App() {
           `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${obj.id}`
         );
       } else {
-        setCardItems((prev) => [...prev, data]);
         const { data } = await axios.post(
           "https://639c41cc16d1763ab14412f9.mockapi.io/cart",
           obj
         );
+        setCardItems((prev) => [...prev, data]);
       }
     } catch (error) {
       alert("Не удалось добавить товар в корзину");
