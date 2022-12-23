@@ -43,9 +43,11 @@ function Header({ onClickOpened }) {
             </svg>
           </li>
         </Link>
-        <li className="header__item header__user">
-          <img src="/assets/images/icons/user.svg" alt="user" />
-        </li>
+        <Link to="/orders">
+          <li className="header__item header__user">
+            <img src="/assets/images/icons/user.svg" alt="user" />
+          </li>
+        </Link>
       </ul>
     </header>
   );

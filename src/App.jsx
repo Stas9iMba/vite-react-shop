@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
+import Orders from "./pages/Orders";
 import Favorite from "./pages/Favorite";
 import AppContext from "./context";
 
@@ -109,6 +110,7 @@ function App() {
         onAddFavorite,
         setIsOpenedCard,
         setCardItems,
+        onAddToCard,
       }}
     >
       <div className="wrapper">
@@ -136,6 +138,7 @@ function App() {
             }
           />
           <Route path="/favorites" element={<Favorite />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>

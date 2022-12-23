@@ -33,16 +33,18 @@ function Card({
       ) : (
         <>
           <div className="card__img">
-            <img
-              className="card__img-heard"
-              onClick={handleFavoriteProduct}
-              src={
-                isFavorite
-                  ? "/assets/images/icons/button-heart--active.svg"
-                  : "/assets/images/icons/button-heart.svg"
-              }
-              alt="btnHeard"
-            />
+            {onClickFavorite && (
+              <img
+                className="card__img-heard"
+                onClick={handleFavoriteProduct}
+                src={
+                  isFavorite
+                    ? "/assets/images/icons/button-heart--active.svg"
+                    : "/assets/images/icons/button-heart.svg"
+                }
+                alt="btnHeard"
+              />
+            )}
 
             <img src={imgProduct} alt="product" />
           </div>
@@ -54,16 +56,18 @@ function Card({
               <span>Цена: </span>
               <span>{price} руб.</span>
             </div>
-            <img
-              className="card__button"
-              onClick={handleAddedProduct}
-              src={
-                getAddedItems(id)
-                  ? "/assets/images/icons/button-add--active.svg"
-                  : "/assets/images/icons/button-add.svg"
-              }
-              alt="Plus"
-            />
+            {addProduct && (
+              <img
+                className="card__button"
+                onClick={handleAddedProduct}
+                src={
+                  getAddedItems(id)
+                    ? "/assets/images/icons/button-add--active.svg"
+                    : "/assets/images/icons/button-add.svg"
+                }
+                alt="Plus"
+              />
+            )}
           </div>
         </>
       )}
