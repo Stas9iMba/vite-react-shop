@@ -24,51 +24,62 @@ function App() {
   // }, []);
 
   React.useEffect(() => {
-    async function fetchData() {
-      const itemsResponse = await axios.get(
-        "https://639c41cc16d1763ab14412f9.mockapi.io/items"
-      );
-      const cardItemResponse = await axios.get(
-        "https://639c41cc16d1763ab14412f9.mockapi.io/cart"
-      );
-      const favoriteResponse = await axios.get(
-        "https://639c41cc16d1763ab14412f9.mockapi.io/favorite"
-      );
+    try {
+      async function fetchData() {
+        const itemsResponse = await axios.get(
+          "https://639c41cc16d1763ab14412f9.mockapi.io/items"
+        );
+        const cardItemResponse = await axios.get(
+          "https://639c41cc16d1763ab14412f9.mockapi.io/cart"
+        );
+        const favoriteResponse = await axios.get(
+          "https://639c41cc16d1763ab14412f9.mockapi.io/favorite"
+        );
 
-      setIsLoading(false);
-      setItems(itemsResponse.data);
-      setCardItems(cardItemResponse.data);
-      setFavorites(favoriteResponse.data);
+        setIsLoading(false);
+        setItems(itemsResponse.data);
+        setCardItems(cardItemResponse.data);
+        setFavorites(favoriteResponse.data);
+      }
+
+      fetchData();
+    } catch (error) {
+      alert("Ошибка при запросе данных! ;(");
+      console.error(error);
     }
-
-    fetchData();
   }, []);
 
-  const onAddToCard = async (obj) => {
+  async function onAddToCard(obj) {
     try {
       if (cardItems.find((item) => item.parentId === obj.id)) {
         setCardItems((prev) => prev.filter((item) => item.parentId !== obj.id));
-        axios.delete(
+        await axios.delete(
           `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${obj.id}`
         );
       } else {
+        setCardItems((prev) => [...prev, data]);
         const { data } = await axios.post(
           "https://639c41cc16d1763ab14412f9.mockapi.io/cart",
           obj
         );
-        setCardItems((prev) => [...prev, data]);
       }
     } catch (error) {
       alert("Не удалось добавить товар в корзину");
+      console.error(error);
     }
-  };
-
-  function onRemoveCard(id) {
-    axios.delete(`https://639c41cc16d1763ab14412f9.mockapi.io/cart/${id}`);
-    setCardItems((prev) => prev.filter((item) => item.id !== id));
   }
 
-  const onAddFavorite = async (obj) => {
+  function onRemoveCard(id) {
+    try {
+      setCardItems((prev) => prev.filter((item) => item.id !== id));
+      axios.delete(`https://639c41cc16d1763ab14412f9.mockapi.io/cart/${id}`);
+    } catch (error) {
+      alert("Не удалось удалить товар");
+      console.error(error);
+    }
+  }
+
+  async function onAddFavorite(obj) {
     try {
       if (favorites.find((item) => item.id === obj.id)) {
         axios.delete(
@@ -84,8 +95,9 @@ function App() {
       }
     } catch (error) {
       alert("Не удалось добавить в избранное");
+      console.error(error);
     }
-  };
+  }
 
   function onChangeSearchInput(event) {
     setSearchValue(event.target.value);
