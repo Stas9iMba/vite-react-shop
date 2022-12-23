@@ -39,8 +39,8 @@ function Card({
                 onClick={handleFavoriteProduct}
                 src={
                   isFavorite
-                    ? "/assets/images/icons/button-heart--active.svg"
-                    : "/assets/images/icons/button-heart.svg"
+                    ? "assets/images/icons/button-heart--active.svg"
+                    : "assets/images/icons/button-heart.svg"
                 }
                 alt="btnHeard"
               />
@@ -62,8 +62,8 @@ function Card({
                 onClick={handleAddedProduct}
                 src={
                   getAddedItems(id)
-                    ? "/assets/images/icons/button-add--active.svg"
-                    : "/assets/images/icons/button-add.svg"
+                    ? "assets/images/icons/button-add--active.svg"
+                    : "assets/images/icons/button-add.svg"
                 }
                 alt="Plus"
               />

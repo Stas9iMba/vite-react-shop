@@ -23,7 +23,7 @@ function Info({ img, title, description }) {
         <img
           width={16}
           height={14}
-          src="/assets/images/icons/arrow-left.svg"
+          src="assets/images/icons/arrow-left.svg"
           alt="arrow"
         />
       </button>

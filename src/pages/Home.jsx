@@ -25,7 +25,7 @@ function Home({
             className="search"
             width={20}
             height={20}
-            src="/assets/images/icons/search.svg"
+            src="assets/images/icons/search.svg"
             alt="search"
           />
           <input
@@ -40,7 +40,7 @@ function Home({
               className="remove"
               width={15}
               height={15}
-              src="/assets/images/icons/button-remove.svg"
+              src="assets/images/icons/button-remove.svg"
               alt="remove"
               onClick={removeSearchInput}
             />

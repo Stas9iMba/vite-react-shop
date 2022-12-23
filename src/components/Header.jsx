@@ -10,12 +10,7 @@ function Header({ onClickOpened }) {
     <header className="header">
       <Link to="/">
         <div className="header__logo">
-          <img
-            src="/assets/images/logo.png"
-            width={40}
-            height={40}
-            alt="logo"
-          />
+          <img src="assets/images/logo.png" width={40} height={40} alt="logo" />
           <div>
             <h1 className="header__title">REACT Shop</h1>
             <p className="header__subtitle">Магазин лучших кроссовок</p>
@@ -24,7 +19,7 @@ function Header({ onClickOpened }) {
       </Link>
       <ul className="header__right" role="list">
         <li className="header__item header__cart" onClick={onClickOpened}>
-          <img src="/assets/images/icons/cart.svg" alt="cart" />
+          <img src="assets/images/icons/cart.svg" alt="cart" />
           <span>{totalPrice} руб.</span>
         </li>
         <Link to="/favorites">
@@ -45,7 +40,7 @@ function Header({ onClickOpened }) {
         </Link>
         <Link to="/orders">
           <li className="header__item header__user">
-            <img src="/assets/images/icons/user.svg" alt="user" />
+            <img src="assets/images/icons/user.svg" alt="user" />
           </li>
         </Link>
       </ul>

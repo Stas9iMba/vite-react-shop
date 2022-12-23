@@ -15,7 +15,7 @@ function Favorite() {
             className="main__back"
             width={32}
             height={32}
-            src="/assets/images/icons/button-back.svg"
+            src="assets/images/icons/button-back.svg"
             alt="back"
           />
         </Link>

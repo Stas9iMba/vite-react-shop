@@ -46,7 +46,7 @@ function Drawer({ items = [], onClickClose, onRemove, opened }) {
             className="drawer__btn-img"
             width={32}
             height={32}
-            src="/assets/images/icons/button-remove.svg"
+            src="assets/images/icons/button-remove.svg"
             alt="Close"
             onClick={onClickClose}
           />
@@ -77,7 +77,7 @@ function Drawer({ items = [], onClickClose, onRemove, opened }) {
                         className="drawer__btn-img"
                         width={32}
                         height={32}
-                        src="/assets/images/icons/button-remove.svg"
+                        src="assets/images/icons/button-remove.svg"
                         alt="remove"
                       />
                     </button>
@@ -107,7 +107,7 @@ function Drawer({ items = [], onClickClose, onRemove, opened }) {
                 <img
                   width={16}
                   height={14}
-                  src="/assets/images/icons/arrow-right.svg"
+                  src="assets/images/icons/arrow-right.svg"
                   alt="arrow"
                 />
               </button>
@@ -123,8 +123,8 @@ function Drawer({ items = [], onClickClose, onRemove, opened }) {
             }
             img={
               isOrderCompleted
-                ? "/assets/images/side-basket-order.jpg"
-                : "/assets/images/side-basket-empty.jpg"
+                ? "assets/images/side-basket-order.jpg"
+                : "assets/images/side-basket-empty.jpg"
             }
           />
         )}
