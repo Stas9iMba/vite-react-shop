@@ -114,13 +114,12 @@ function App() {
       }}
     >
       <div className="wrapper">
-        {isOpenedCard && (
-          <Drawer
-            items={cardItems}
-            onClickClose={() => setIsOpenedCard(false)}
-            onRemove={onRemoveCard}
-          />
-        )}
+        <Drawer
+          items={cardItems}
+          onClickClose={() => setIsOpenedCard(false)}
+          onRemove={onRemoveCard}
+          opened={isOpenedCard}
+        />
         <Header onClickOpened={() => setIsOpenedCard(true)} />
         <Routes>
           <Route

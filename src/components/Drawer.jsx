@@ -6,7 +6,7 @@ import { useCart } from "../hooks/useCart";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function Drawer({ items = [], onClickClose, onRemove }) {
+function Drawer({ items = [], onClickClose, onRemove, opened }) {
   const { cardItems, setCardItems, totalPrice } = useCart();
   const [isOrderCompleted, setIsOrderCompleted] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -38,7 +38,7 @@ function Drawer({ items = [], onClickClose, onRemove }) {
   };
 
   return (
-    <section className="side-basket">
+    <section className={opened ? "side-basket" : "visually-hidden"}>
       <div className="side-basket__box">
         <div className="side-basket__top">
           <h2 className="side-basket__title">Корзина</h2>

@@ -260,6 +260,26 @@ body {
   }
 }
 
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+
+  .side-basket {
+    &__box {
+      transform: translateX(100%);
+    }
+  }
+
+}
+
 .side-basket {
   position: absolute;
   height: 100%;
@@ -268,6 +288,7 @@ body {
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9;
+  overflow: hidden;
 
   &__box {
     display: flex;
@@ -280,6 +301,8 @@ body {
     background-color: #ffffff;
     box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    transform: translateX(0);
+    transition: transform .3s ease-in-out;
   }
 
   &__top {
@@ -372,6 +395,7 @@ body {
     }
   }
 }
+
 
 .card {
   &__product {
