@@ -28,9 +28,9 @@ function App() {
       async function fetchData() {
         const [itemsResponse, cardItemResponse, favoriteResponse] =
           await Promise.all([
-            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/items"),
-            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/cart"),
-            axios.get("https://639c41cc16d1763ab14412f9.mockapi.io/favorite"),
+            axios.get("http://localhost:3001/items"),
+            axios.get("http://localhost:3001/cart"),
+            axios.get("http://localhost:3001/favorite"),
           ]);
 
         setIsLoading(false);
@@ -52,14 +52,9 @@ function App() {
 
       if (findItem) {
         setCardItems((prev) => prev.filter((item) => item.parentId !== obj.id));
-        await axios.delete(
-          `https://639c41cc16d1763ab14412f9.mockapi.io/cart/${findItem.id}`
-        );
+        await axios.delete(`http://localhost:3001/cart/${findItem.id}`);
       } else {
-        const { data } = await axios.post(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/cart",
-          obj
-        );
+        const { data } = await axios.post("http://localhost:3001/cart", obj);
         setCardItems((prev) => [...prev, data]);
       }
     } catch (error) {
@@ -71,7 +66,7 @@ function App() {
   function onRemoveCard(id) {
     try {
       setCardItems((prev) => prev.filter((item) => item.id !== id));
-      axios.delete(`https://639c41cc16d1763ab14412f9.mockapi.io/cart/${id}`);
+      axios.delete(`http://localhost:3001/cart/${id}`);
     } catch (error) {
       alert("Не удалось удалить товар");
       console.error(error);
@@ -81,13 +76,11 @@ function App() {
   async function onAddFavorite(obj) {
     try {
       if (favorites.find((item) => item.id === obj.id)) {
-        axios.delete(
-          `https://639c41cc16d1763ab14412f9.mockapi.io/favorite/${obj.id}`
-        );
+        axios.delete(`http://localhost:3001/favorite/${obj.id}`);
         setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
       } else {
         const { data } = await axios.post(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/favorite",
+          "http://localhost:3001/favorite",
           obj
         );
         setFavorites((prev) => [...prev, data]);

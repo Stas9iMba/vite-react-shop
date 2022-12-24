@@ -13,9 +13,7 @@ function Orders() {
   React.useEffect(() => {
     try {
       async function fetchData() {
-        const responseOrders = await axios.get(
-          "https://639c41cc16d1763ab14412f9.mockapi.io/orders"
-        );
+        const responseOrders = await axios.get("http://localhost:3001/orders");
 
         setOrders(
           responseOrders.data.reduce((prev, obj) => [...prev, ...obj.items], [])
